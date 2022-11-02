@@ -1,0 +1,33 @@
+input UserInputs {
+    userId: String!
+    password:String!
+}
+
+scalar DateScalar
+
+
+input BarcodeInputs {
+    id: Int!
+    barcode: String!
+}
+
+type Barcode {
+    _id:String!
+    id: Int!
+    barcode: String!
+}
+
+type User{
+    userId: String
+    password:String
+    type: String
+}
+
+type Query {
+    BarcodeList : [Barcode!]!
+    userLogin(user:UserInputs!): User
+}
+
+type Mutation {
+    addBarcode(barcode: BarcodeInputs!): Barcode!
+}

@@ -1,0 +1,96 @@
+* {
+  margin: 10px;
+  font-family: 'Times New Roman', Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+
+}
+
+body {
+  margin: 0 auto;
+  width: 80%;
+}
+
+table {
+  margin: auto;
+  padding-top: 2%;
+  padding-bottom: 5%;
+  text-align: center;
+}
+
+.content td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+tr{
+  height: 50px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #15172b;
+  color: white;
+}
+
+.fieldstyles {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-weight: bolder
+}
+
+.labelstyles {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+nav a {
+  display: inline;
+  margin: 0 20px;
+  font-weight: bold;
+  position: relative;
+  text-decoration: none;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 21px;
+  color: #000;
+  text-transform: uppercase;
+
+}
+
+nav a::after {
+  content: '';
+  height: 3px;
+  width: 0;
+  background: #960000;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  transition: 0.5s;
+  /* Learned from https://www.w3schools.com/ */
+}
+
+nav a:hover::after {
+  /* Learned from https://www.w3schools.com/ */
+  width: 100%;
+}
+
+/* Student Id : 8759314 */
