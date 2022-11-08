@@ -4,6 +4,7 @@ const DateScalar = require('./graphqlDate.js');
 const { ApolloServer } = require('apollo-server-express');
 const barcode = require('./barcode.js')
 const user = require('./user.js');
+const product = require('./product.js');
 const { userInfo } = require('os');
 const resolvers = {
     
@@ -12,10 +13,14 @@ const resolvers = {
     Query: {
         userLogin: user.loginVerify,
         BarcodeList: barcode.BarcodeList,
+        productList: product.productList,
+        getProduct: product.getProduct,
     },
     
     Mutation: {
         addBarcode: barcode.addBarcode,
+        addProduct: product.addProduct,
+        updateProduct: product.updateProduct,
     },
 };
 
