@@ -9,7 +9,7 @@ const BarcodeSchema = new Schema({
 
 
 
-const Barcode = mongoose.model('Barcode', BarcodeSchema, "barcodes");
+const Barcode = mongoose.model('Barcode', BarcodeSchema);
 module.exports = Barcode;
 
 

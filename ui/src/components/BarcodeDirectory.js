@@ -1,5 +1,6 @@
 import graphQLFetch from '../graphQLFetch.js';
 import { withRouter } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
 
 
 class BarcodeRow extends React.Component {
@@ -165,7 +166,9 @@ class BarcodeDirectory extends React.Component {
             });
             return response.json();
         }
-
+        
+        const userId = ReactSession.get("userId");
+        console.log("user id is dispalyed inside barcode directory "+userId)
         document.getElementById("scanner-main").style.display="block";
         const result = BarcodeData('/graphql', query)
             .then(result => {

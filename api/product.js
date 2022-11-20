@@ -6,8 +6,8 @@ const {  UserInputError } = require('apollo-server-express');
 
 // async function maxId()
 // {
-//     // const id = await Product.findOne({$query:{},$orderby:{id:1}})
-//     const id = await Product.findOne({}).sort({ id: -1 })
+//     // const id = await EmployeeDAO.findOne({$query:{},$orderby:{id:1}})
+//     const id = await EmployeeDAO.findOne({}).sort({ id: -1 })
 //     .then((response)=> {
 //         console.log(JSON.stringify("id inside the ql  "+response.id))
 //         return !response?0:response.id;
@@ -16,14 +16,14 @@ const {  UserInputError } = require('apollo-server-express');
 // }
 
 
-// function validateIssue(product) {
-//     console.log(product)
+// function validateIssue(employee) {
+//     console.log(employee)
 //     const errors = [];
-//     if (product.price < 1) {
-//         errors.push('Price should be atleast 1')
+//     if (employee.age < 20) {
+//         errors.push('Age should be greater than 20')
 //     }
-//     if (product.price > 100000) {
-//         errors.push('Price should be less than one lakh')
+//     if (employee.age > 70) {
+//         errors.push('Age should be less than 70')
 //     }
 //     console.log(errors.length)
 //     if (errors.length > 0) {
@@ -40,6 +40,12 @@ function productList()
     })
     return products;
 }
+
+// function BarcodeFind(){
+//     const barcode_find = Barcode.findOne({barcode.barcode});
+//     console.log(barcode_find);
+// }
+
 
 
 async function addProduct(_, {product}) {

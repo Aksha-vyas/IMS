@@ -1,6 +1,21 @@
 input UserInputs {
     userId: String!
     password:String!
+    userType: String
+}
+input UserTypeInputs{
+    role: String
+}
+
+type User{
+    _id:String
+    userId: String
+    password:String
+    userType: UserType
+}
+
+type UserType{
+    role: String
 }
 
 scalar DateScalar
@@ -32,20 +47,17 @@ input ProductInputs {
     barcode: String!
 }
 
-type User{
-    userId: String
-    password:String
-    type: String
-}
-
 type Query {
     BarcodeList : [Barcode!]!
     userLogin(user:UserInputs!): User
+    userList : [User!]!
+    userTypeList : [UserType!]!
     productList : [Product!]!
     getProduct(id: Int): Product!
 }
 
 type Mutation {
+    addUser(user: UserInputs!): User!
     addBarcode(barcode: BarcodeInputs!): Barcode!
     addProduct(product: ProductInputs!): Product!
     updateProduct(product: ProductInputs!):String
