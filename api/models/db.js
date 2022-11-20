@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://fullstack:assignment@fscluster1.z3dws.mongodb.net/barcode?authSource=admin&replicaSet=atlas-k86e7c-shard-0&readPreference=primary&ssl=true');
+mongoose.connect('mongodb+srv://fullstack:assignment@fscluster1.z3dws.mongodb.net');
 mongoose.connection.on("connected", function(){    
     console.log("Application is connected to Databse");
 })
