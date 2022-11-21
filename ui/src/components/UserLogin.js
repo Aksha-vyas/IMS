@@ -1,5 +1,6 @@
 import graphQLFetch from '../graphQLFetch.js';
 import { withRouter } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
 
 
 class UserLogin extends React.Component {
@@ -10,8 +11,12 @@ class UserLogin extends React.Component {
     componentDidMount() {
         this.loadData();
     }
-    loadData(){        
+    loadData(){
         document.getElementById("scanner-main").style.display="none";
+        document.getElementById("navbar").style.display="none";
+        ReactSession.set("userId", null);
+        ReactSession.set("type", null);
+
     }
     async loginVerify(user) {
         console.log("inside loginVerify"+ JSON.stringify(user));
@@ -20,7 +25,7 @@ class UserLogin extends React.Component {
                 userLogin(user: $user) {
                     userId
                     password
-                    type
+                    userType{role} 
                 } 
             }`;
         const data = await graphQLFetch(query, { user });
@@ -35,16 +40,31 @@ class UserLogin extends React.Component {
         }
         const response = await this.loginVerify(user);
         console.log(JSON.stringify(response)+"    "+response.userLogin+"   response + _++++"+response)
+        ReactSession.set("userId", response.userLogin?.userId);
+        ReactSession.set("type", response.userLogin?.userType.role);
         const { history } = this.props;
-        if(response.userLogin!= null){
-            history.push({
-                pathname: '/barcode',
-              });
-        }else{
+        if(response.userLogin== null){
             history.push({
               pathname: '/',
             });
+        }else{
+            document.getElementById("navbar").style.display="block";
+            history.push({
+                 pathname: '/products',
+               });
         }
+        
+        // else if(response.userLogin.userType.role == "Associate" || response.userLogin.userType.role == "Supervisor"){            
+        // document.getElementById("navbar").style.display="block";
+        //     history.push({
+        //         pathname: '/barcode',
+        //       });
+        // }else if(response.userLogin.userType.role == "Admin"){
+        //     document.getElementById("navbar").style.display="block";
+        //     history.push({
+        //       pathname: '/adminBoard',
+        //     });
+        // }
     }
 
     render() {

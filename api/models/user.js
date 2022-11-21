@@ -3,10 +3,13 @@ const Schema = mongoose.Schema;
 
 const user = new Schema({
     userId: String,
-    password: String,
-    Type: String
+    password: String,    
+    userType: {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'UserType'
+    },
 });
 
 
-const User = mongoose.model('User', user, "users");
+const User = mongoose.model('User', user);
 module.exports = User;
