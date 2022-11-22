@@ -8,6 +8,7 @@ import ProductEdit from './ProductEdit.js';
 import UserList from './UserList.js';
 import UserAdd from './UserAdd';
 import UserEdit from './UserEdit';
+import ProductView from './ProductView.js';
 ProductList
 const NotFound = () => <h1>Page Not Found</h1>;
 
@@ -22,6 +23,7 @@ export default function Contents() {
             <Route path="/barcode" component={BarcodeDirectory} />
             <Route path="/products" component={ProductList} />
             <Route path="/productEdit/:id" component={ProductEdit} />
+            <Route path="/productView/:id" component={ProductView} />
             <Route component={NotFound} />
         </Switch>
     )
