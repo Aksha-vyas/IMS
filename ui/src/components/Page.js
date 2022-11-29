@@ -8,14 +8,14 @@ function NavBar() {
   console.log("user id is dispalyed "+type);
     return (
       <div id="navbar">
-        <Link to={`/products`}><div id="logo"></div></Link>
+        <Link to={`/products`}><div id="logo"><span role="img" aria-label="The store logo"> </span></div></Link>
       <nav>
         {/* <NavLink exact to="/">Home</NavLink>
         {' | '}
         <NavLink to="/barcode">Scan Barcode</NavLink>
         {' | '} */}
         {type =="Supervisor" &&
-        <NavLink to="/products">Stock</NavLink>
+        <NavLink to="/stock">Stock</NavLink>
         
       }
       {type =="Admin" &&

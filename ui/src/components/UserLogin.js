@@ -80,7 +80,7 @@ class UserLogin extends React.Component {
             fontWeight: 'bolder'
         };
         const buttonStyles = {
-            width: '50%',
+            width: '30%',
             backgroundColor: '#000000',
             color: 'white',
             padding: '12px 20px',
@@ -103,8 +103,8 @@ class UserLogin extends React.Component {
                 <div>
                 <label for='password'>Password</label>
                 <input type="password" id='password' name='password' placeholder="Password" style={fieldstyles} required />
-                <button type='submit' stye={buttonStyles}>Login</button>
-                </div>
+                </div>                
+                <button type='submit' class="btn" style={buttonStyles}>Login</button>
                 </div>
             </form>
         )

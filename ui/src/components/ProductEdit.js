@@ -79,7 +79,7 @@ class ProductEdit extends React.Component {
             }
             return null;
         }
-        const { product: { name, price, barcode } } = this.state;
+        const { product: { name, price, barcode,quantity, dateOfExpiry } } = this.state;
 
         const linkStyles = {
             textDecoration: 'none',
@@ -113,9 +113,9 @@ class ProductEdit extends React.Component {
                 <br></br>
 
 
-                <label class="labelstyles" htmlFor="dateOfExpiry">Date of Expiry</label>
+                {/* <label class="labelstyles" htmlFor="dateOfExpiry">Date of Expiry</label>
                 <input class="fieldstyles" type="date" name="dateOfExpiry" value={dateOfExpiry} placeholder="Date of Expiry" onChange={this.onChange} required />
-                <br></br>
+                <br></br> */}
 
                 <label class="labelstyles" htmlFor="barcode">Barcode : </label>
                 <input class="fieldstyles" type="text" name="barcode" value={barcode} onChange={this.onChange} placeholder="barcode" />
