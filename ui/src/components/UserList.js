@@ -5,6 +5,8 @@ class UserTable extends React.Component {
   render() {
     const userRows = this.props.users.map(user => <UserRow key={user._id} user={user} />);
     return (
+      <div id="userTable">
+      <Link to={`/createUser`} className="btnLink">Create New User Account</Link>
         <table className="bordered-table">
             <thead>
                 <tr>
@@ -17,6 +19,7 @@ class UserTable extends React.Component {
                 {userRows}
             </tbody>
         </table>
+        </div>
     )
 }
 }
@@ -83,20 +86,9 @@ class UserList extends React.Component {
   }
 
   render() {
-    const linkStyles = {
-    textDecoration: 'none',
-    width: '100%',
-    backgroundColor: '#000000',
-    color: 'white',
-    padding: '3px 15px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
-}
     return (
       <React.Fragment>
         
-      <Link to={`/createUser`} style={linkStyles}>Create New User Account</Link>
           <UserTable users={this.state.users} />
           <hr />          
       </React.Fragment>
