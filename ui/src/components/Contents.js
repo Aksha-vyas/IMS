@@ -9,7 +9,9 @@ import UserList from './UserList.js';
 import UserAdd from './UserAdd';
 import UserEdit from './UserEdit';
 import ProductView from './ProductView.js';
-ProductList
+import ProductAdd from './ProductAdd.js';
+import StockList from './StockList.js';
+
 const NotFound = () => <h1>Page Not Found</h1>;
 
 export default function Contents() {
@@ -24,6 +26,8 @@ export default function Contents() {
             <Route path="/products" component={ProductList} />
             <Route path="/productEdit/:id" component={ProductEdit} />
             <Route path="/productView/:id" component={ProductView} />
+            <Route path="/productAdd" component={ProductAdd}/>
+            <Route path="/stock" component={StockList}/>
             <Route component={NotFound} />
         </Switch>
     )

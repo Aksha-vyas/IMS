@@ -38,6 +38,8 @@ type Product {
     name:String!
     price:Int!
     barcode: String!
+    dateOfExpiry: DateScalar!
+    quantity: Int!
 }
 
 input ProductInputs {
@@ -45,6 +47,8 @@ input ProductInputs {
     name:String!
     price:Int!
     barcode: String!
+    dateOfExpiry: DateScalar!
+    quantity: Int!
 }
 
 type Query {

@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 const product = new Schema({
     id:Number,
     name : String,
-    // dateOfExpiry : Date,
-    price : Number,
     barcode : String,
-
+    dateOfExpiry: {type: Date, default: new Date()},
+    price : Number,
+    quantity : Number,
 });
 
 

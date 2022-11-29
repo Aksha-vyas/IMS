@@ -1,6 +1,6 @@
 import React from 'react';
 import Contents from './Contents.js';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { ReactSession } from 'react-client-session';
 
 function NavBar() {
@@ -8,6 +8,7 @@ function NavBar() {
   console.log("user id is dispalyed "+type);
     return (
       <div id="navbar">
+        <Link to={`/products`}><div id="logo"></div></Link>
       <nav>
         {/* <NavLink exact to="/">Home</NavLink>
         {' | '}
@@ -18,7 +19,7 @@ function NavBar() {
         
       }
       {type =="Admin" &&
-      <NavLink to="/products">Stock</NavLink>
+      <NavLink to="/stock">Stock</NavLink>
     }
     {type =="Admin" &&
     <NavLink to="/users">Users</NavLink>
@@ -34,14 +35,25 @@ function NavBar() {
       </div>
     );
   }
-
+  function Footer() {
+      return (
+        <footer>
+            <p class="copyright">
+                <i>Copyright &copy; 2022 The Store <br />
+                    <a href="mailto:thestoremanagementsystem@gmail.com">thestoremanagementsystem@gmail.com</a></i>
+            </p>
+        </footer>
+      );
+    }
   export default function Page() {
     console.log("inside Page");
-    document.getElementById("scanner-main").style.display="none";
+    // document.getElementById("scanner-main").style.display="none";
     return (
       <div>
         <NavBar />
         <Contents />
+        <Footer/>
+        
       </div>
     );
   }
