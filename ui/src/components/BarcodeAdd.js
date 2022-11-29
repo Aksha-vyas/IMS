@@ -181,8 +181,8 @@ class BarcodeAdd extends React.Component {
           <div id="scanner-container"></div>
           <input type="button" class="btn" id="btn" value="Start the scanner" onClick={this.startScanner} />
           <form name="barcodeAdd" onSubmit={this.submit}>
-            <label htmlFor="barcode">Barcode</label>
-            <input type="text" name="barcode" placeholder="Scanned Barcode" style={fieldstyles} onChange={this.onChange} required />
+            <label for='barcode'>Barcode</label>
+            <input type="text" id= 'barcode' name='barcode' placeholder="Scanned Barcode" style={fieldstyles} onChange={this.onChange} required />
             <button type="submit" id="barcodeBtn" style={buttonStyles}>{barcodeBtnText}</button>
           </form>
         </div>

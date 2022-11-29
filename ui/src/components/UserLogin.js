@@ -97,13 +97,13 @@ class UserLogin extends React.Component {
             </div>
                 <div class="loginForm">
                     <div>
-                <label htmlFor="userId">User id</label>
-                <input type="text" name="userId" placeholder="User Id" style={fieldstyles} required />
+                <label for='userId'>User id</label>
+                <input type="text" id='userId' name="userId" placeholder="User Id" style={fieldstyles} required />
                 </div>
                 <div>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" placeholder="Password" style={fieldstyles} required />
-                <button type="submit" style={buttonStyles}>Login</button>
+                <label for='password'>Password</label>
+                <input type="password" id='password' name='password' placeholder="Password" style={fieldstyles} required />
+                <button type='submit' stye={buttonStyles}>Login</button>
                 </div>
                 </div>
             </form>

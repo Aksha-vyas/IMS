@@ -17,7 +17,7 @@ class ProductRow extends React.Component {
           <tr>
           <td>{product.id}</td>
           <td>{product.name}</td>
-          <td>{product.price}</td>
+          <td>${product.price}</td>
           <td>{product.barcode}</td>
           <td><Link to={`/productEdit/${product.id}`} style={linkStyles}>Edit</Link>
               <Link to={`/productView/${product.id}`} style={linkStyles}>View</Link></td>
