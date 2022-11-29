@@ -1,6 +1,7 @@
 import graphQLFetch from '../graphQLFetch.js';
 import { withRouter } from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
+import React from 'react';
 
 
 class UserLogin extends React.Component {
@@ -12,7 +13,7 @@ class UserLogin extends React.Component {
         this.loadData();
     }
     loadData(){
-        document.getElementById("scanner-main").style.display="none";
+        // document.getElementById("scanner-main").style.display="none";
         document.getElementById("navbar").style.display="none";
         ReactSession.set("userId", null);
         ReactSession.set("type", null);
@@ -89,15 +90,22 @@ class UserLogin extends React.Component {
         }
         return (
             <form name="login" onSubmit={this.submit}>
-                <div>
+                
+                <div class="content">
+            </div>
+            <div class="content-left">
+            </div>
+                <div class="loginForm">
+                    <div>
                 <label htmlFor="userId">User id</label>
                 <input type="text" name="userId" placeholder="User Id" style={fieldstyles} required />
                 </div>
                 <div>
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" placeholder="Password" style={fieldstyles} required />
-                </div>
                 <button type="submit" style={buttonStyles}>Login</button>
+                </div>
+                </div>
             </form>
         )
     }
