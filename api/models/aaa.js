@@ -21,13 +21,13 @@ function userTypeData() {
 function userData() {
     const users = [
         {
-            userId: "emy", password: "password", userType: "637070793aafddfee001c908"
+            userId: "emy", password: "password", userType: "63859c02945f49694c8ff14a", firstName:"Emy", lastName:"Baby Jacob", designation:"Manager"
         },
         {
-            userId: "sharan", password: "password", userType: "637070793aafddfee001c90a"
+            userId: "sharan", password: "password", userType: "63859c02945f49694c8ff14b", firstName:"Sai Sharan", lastName:"Kuntla", designation:"Manager"
         },
         {
-            userId: "aksha", password: "password", userType: "637070793aafddfee001c909"
+            userId: "aksha", password: "password", userType: "63859c02945f49694c8ff14c", firstName:"Aksha", lastName:"Vyas", designation:"Manager"
         }
     ]
     user.insertMany(users);
@@ -63,7 +63,7 @@ function productData() {
 }
 function aaa() {
     // userTypeData();
-    // userData();
+    userData();
     // productData();
     console.log("aaa is empty");
 

@@ -18,13 +18,18 @@ const resolvers = {
         BarcodeList: barcode.BarcodeList,
         productList: product.productList,
         getProduct: product.getProduct,
+        maxIdProduct : product.maxId,
+        getUser : user.getUser,
     },
     
     Mutation: {
         addUser: user.addUser,
         addBarcode: barcode.addBarcode,
         addProduct: product.addProduct,
+        deleteProduct: product.deleteProduct,
         updateProduct: product.updateProduct,
+        updateUser: user.updateUser,
+        deleteUser:user.deleteUser,
     },
 };
 

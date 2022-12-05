@@ -1,7 +1,11 @@
 input UserInputs {
+    _id:String
     userId: String!
     password:String!
     userType: String
+    firstName: String
+    lastName: String
+    designation: String
 }
 input UserTypeInputs{
     role: String
@@ -12,9 +16,13 @@ type User{
     userId: String
     password:String
     userType: UserType
+    firstName: String
+    lastName: String
+    designation: String
 }
 
 type UserType{
+    _id:String
     role: String
 }
 
@@ -58,11 +66,16 @@ type Query {
     userTypeList : [UserType!]!
     productList : [Product!]!
     getProduct(id: Int): Product!
+    getUser(id: String): User
+    maxIdProduct : Int
 }
 
 type Mutation {
     addUser(user: UserInputs!): User!
     addBarcode(barcode: BarcodeInputs!): Barcode!
+    deleteProduct(id: Int!): String!
     addProduct(product: ProductInputs!): Product!
     updateProduct(product: ProductInputs!):String
+    updateUser(user: UserInputs!):String
+    deleteUser(_id: String!): String!
 }

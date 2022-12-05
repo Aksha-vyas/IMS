@@ -102,13 +102,15 @@ class BarcodeAdd extends React.Component {
         document.getElementById("scanner-container").style.display = "none";
         document.getElementById("btn").style.display = "block";
   
-        document.getElementById("barcodeBtn").style.display = "block";
         const productExists = products.map(p => p.barcode).includes(result.codeResult.code);
+        document.getElementById("barcodeBtn").style.display = "block";
         if (productExists) {
-          this.setState({ productExists: true })
-          this.setState({ barcodeBtnText: "View Product" })
+          // this.setState({ productExists: true })
+          // this.setState({ barcodeBtnText: "View Product" })
+        document.getElementById("barcodeBtn").innerText = "View Product"
         } else {
-          this.setState({ barcodeBtnText: "Add Product" })
+          // this.setState({ barcodeBtnText: "Add Product" })
+        document.getElementById("barcodeBtn").innerText = "Add Product"
         }
       });
     }
@@ -119,9 +121,9 @@ class BarcodeAdd extends React.Component {
       const productExists = this.props.products.map(p => p.barcode).includes(value);
       if (productExists) {
         this.setState({ productExists: true })
-        this.setState({ barcodeBtnText: "View Product" })
+        document.getElementById("barcodeBtn").innerText = "View Product"
       } else {
-        this.setState({ barcodeBtnText: "Add Product" })
+        document.getElementById("barcodeBtn").innerText = "Add Product"
       }
     }
   
@@ -183,7 +185,7 @@ class BarcodeAdd extends React.Component {
           <form name="barcodeAdd" onSubmit={this.submit}>
             <label for='barcode'>Barcode</label>
             <input type="text" id= 'barcode' name='barcode' placeholder="Scanned Barcode" style={fieldstyles} onChange={this.onChange} required />
-            <button type="submit" id="barcodeBtn" style={buttonStyles}>{barcodeBtnText}</button>
+            <button type="submit" id="barcodeBtn" defaultValue="View/Add Product" style={buttonStyles}></button>
           </form>
         </div>
       )

@@ -35,59 +35,20 @@ async function addUser(_, { user }) {
     return userCreated;
 }
 
-/*
-
-async function maxId()
-{
-    // const id = await EmployeeDAO.findOne({$query:{},$orderby:{id:1}})
-    const id = await EmployeeDAO.findOne({}).sort({ id: -1 })
-    .then((response)=> {
-        console.log(JSON.stringify("id inside the ql  "+response.id))
-        return !response?0:response.id;
-    });
-    return id;
-}
-
-
-function validateIssue(employee) {
-    console.log(employee)
-    const errors = [];
-    if (employee.age < 20) {
-        errors.push('Age should be greater than 20')
-    }
-    if (employee.age > 70) {
-        errors.push('Age should be less than 70')
-    }
-    console.log(errors.length)
-    if (errors.length > 0) {
-        throw new UserInputError('Invalid input(s)', { errors });
-    }
-}
-
-async function addEmployee(_, { employee }) {
-    validateIssue(employee);
-    const emp = new EmployeeDAO(employee);
-    const empCreated = await emp.save();
-    console.log('created employee... ', empCreated);
-    return empCreated;
-}
-
-
-async function updateEmployee(_, { employee }) {
-    const emp = new EmployeeDAO(employee);
-    const res = await EmployeeDAO.updateOne({id:employee.id},employee);
-    console.log("Response___api/employee.js"+JSON.stringify(res))
+async function updateUser(_, { user }) {
+    const res = await UserDAO.updateOne({_id:user._id},user);
+    console.log("Response___api/product.js"+JSON.stringify(res))
     return "updated";
-  }
-  
-  async function deleteEmployee(_, { id }) {
-    await EmployeeDAO.deleteOne({id:id});
+}
+
+  async function deleteUser(_, { _id }) {
+    await UserDAO.deleteOne({_id:_id});
     return "deleted";
   }
   
-  async function getEmployee(_, { id }) {
-    const employee = await EmployeeDAO.findOne({ id });
-    return employee;
+  async function getUser(_, { id }) {
+    console.log("_id to be found is "+id)
+    const user = await UserDAO.findOne({ _id:id }).populate('userType');
+    return user;
   }
-  */
-module.exports = { loginVerify ,userList, addUser };
+module.exports = { loginVerify ,userList, addUser, updateUser, deleteUser, getUser };

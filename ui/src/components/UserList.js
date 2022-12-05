@@ -1,17 +1,21 @@
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import graphQLFetch from '../graphQLFetch.js';
 
 class UserTable extends React.Component {
   render() {
-    const userRows = this.props.users.map(user => <UserRow key={user._id} user={user} />);
+    const userRows = this.props.users.map(user => <UserRow key={user._id} user={user} history={this.props.history}/>);
     return (
       <div id="userTable">
       <Link to={`/createUser`} className="btnLink">Create New User Account</Link>
         <table className="bordered-table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Role</th>
+                    <th>User Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Designation</th>
+                    <th>Account Role</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -25,6 +29,25 @@ class UserTable extends React.Component {
 }
 
 class UserRow extends React.Component {
+  constructor(){
+    super();
+    this.onDelete = this.onDelete.bind(this);
+  }
+  async onDelete(_id) {
+    const query = `mutation deleteUser($_id: String!){
+      deleteUser(_id: $_id)
+    }`;
+    console.log("id for deleting  " + _id)
+    const { history } = this.props;
+    let text = "Delete the user?";
+    if (confirm(text) == true) {
+      const data = await graphQLFetch(query, { _id: _id });
+      setTimeout(() => history.go(0), 1000);
+      alert('User Deleted');
+    }
+    // history.push({pathname: '/users',});
+    // setTimeout(() => window.location.reload, 3000);
+  }
   render() {
       const user = this.props.user;const linkStyles = {
         textDecoration: 'none',
@@ -39,8 +62,12 @@ class UserRow extends React.Component {
       return (
           <tr>
           <td>{user.userId}</td>
+          <td>{user.firstName}</td>
+          <td>{user.lastName}</td>
+          <td>{user.designation}</td>
           <td>{user.userType.role}</td>
-          <td><Link to={`/userEdit/${user._id}`} style={linkStyles}>Edit</Link></td>
+          <td><Link to={`/userEdit/${user._id}`} style={linkStyles}>Edit</Link>
+          <a style={linkStyles} onClick={() => { this.onDelete(user._id); }}>Delete</a></td>
           </tr>
       )
   }
@@ -64,6 +91,9 @@ class UserList extends React.Component {
               _id
               userId
               password
+              firstName
+              lastName
+              designation
               userType{role}
           }
       }`;
@@ -89,7 +119,7 @@ class UserList extends React.Component {
     return (
       <React.Fragment>
         
-          <UserTable users={this.state.users} />
+          <UserTable users={this.state.users} history={this.props.history}/>
           <hr />          
       </React.Fragment>
     );
