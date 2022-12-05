@@ -4,16 +4,16 @@ const Product = require('./models/product')
 const {  UserInputError } = require('apollo-server-express');
 
 
-// async function maxId()
-// {
-//     // const id = await EmployeeDAO.findOne({$query:{},$orderby:{id:1}})
-//     const id = await EmployeeDAO.findOne({}).sort({ id: -1 })
-//     .then((response)=> {
-//         console.log(JSON.stringify("id inside the ql  "+response.id))
-//         return !response?0:response.id;
-//     });
-//     return id;
-// }
+
+async function maxId()
+{
+    const id = await Product.findOne({}).sort({ id: -1 })
+    .then((response)=> {
+        console.log(JSON.stringify("id inside the ql  "+response.id))
+        return !response?1:parseInt(response.id)+1;
+    });
+    return id;
+}
 
 
 // function validateIssue(employee) {
@@ -67,5 +67,10 @@ async function getProduct(_, { id }) {
     const product = await Product.findOne({ id });
     return product;
 }
+
+async function deleteProduct(_, { id }) {
+    await Product.deleteOne({id:id});
+    return "deleted";
+  }
   
-module.exports = { addProduct, productList, getProduct, updateProduct};
+module.exports = { addProduct, productList, getProduct, updateProduct,maxId, deleteProduct};

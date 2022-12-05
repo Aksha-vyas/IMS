@@ -10,7 +10,9 @@ body {
   margin: 0 auto;
   width: 80%;
 }
-
+#main{
+text-align: center;
+}
 table {
   margin: auto;
   padding-top: 2%;
@@ -64,13 +66,15 @@ th {
   margin: 8px 0;
   display: inline-block;
   box-sizing: border-box;
+  text-align: left;
 }
 
 nav {
-  display: inline-block;
   float: right;
 }
-
+#navbar{
+  height: 100px;
+}
 nav a {
   display: inline;
   margin: 0 20px;
@@ -124,6 +128,7 @@ footer .copyright a {
 }
 
 #logo {
+  text-indent: -9999px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -131,7 +136,7 @@ footer .copyright a {
   height: 100px;
   cursor: pointer;
   background-image: url(../images/logo.png);
-  display: inline-block;
+  float: left;
 }
 
 .content {
@@ -144,25 +149,25 @@ footer .copyright a {
   background-size: cover;
   text-shadow: 2px 2px #fcfcfc;
   background-image: url(../images/storemanagement2.jpg);
-  border: solid #000;
+  border: solid #fcfcfc;
 }
 
 .content-left {
   width: 45%;
-  height: 20em;
+  height: 15em;
   text-align: center;
   border-radius: 10px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   text-shadow: 2px 2px #fcfcfc;
-  background-image: url(../images/cover.jpg);
+  background-image: url(../images/logo.png);
   float: left;
 }
 
 .loginForm {
   width: 45%;
-  height: 20em;
+  height: auto;
   text-align: center;
   border-radius: 20px;
   text-shadow: 2px 2px #fcfcfc;
@@ -171,11 +176,14 @@ footer .copyright a {
 }
 
 canvas.drawing, canvas.drawingBuffer {
-  position: absolute;
-  left: 100;
+  /* position: absolute; */
+  /* left: 100px; */
+  width:200px !important;
   /* top: 0; */
 }
-
+video{
+  width:200px;
+}
 .btn {
   width: 100%;
   background-color: #000000;
@@ -200,18 +208,49 @@ canvas.drawing, canvas.drawingBuffer {
   border-radius: 4px;
   cursor: pointer;
 }
+.stockContent{
+  text-align: center;
+}
 .stockContent Button{
   text-decoration: none;
   background-color: #000000;
+  font-weight: bolder;
   color: white;
-  padding: 3px 15px;
+  padding: 10px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   float: right;
-  display: block;
 }
-.stockContent table{
+table{
   width: 100%;
+}
+#scanner-container{
+  text-align: center;
+}
+@media (min-width: 800px) {
+  .content-left {
+    width: 45%;
+  }
+  
+  .loginForm {
+    width: 45%;
+  }
+}
+@media (max-width: 799px) {
+  .content-left {
+    width: 100%;
+  }
+  
+  .loginForm {
+    width: 100%;
+    float: none;
+  }
+  .loginForm label{
+    width:100% !important;
+  }
+  .loginForm input{
+    width:100% !important;
+  }
 }
 /* Student Id : 8759314 */

@@ -3,11 +3,11 @@ import { withRouter } from 'react-router-dom';
 import graphQLFetch from '../graphQLFetch.js';
 
 
-class ProductEdit extends React.Component {
+class UserEdit extends React.Component {
     constructor() {
         super();
-        this.state = { product: {}, };
-        this.updateProduct = this.updateProduct.bind(this);
+        this.state = { user: {}, userTypes:[{_id:"",role:"Select Type"}]};
+        this.updateUser = this.updateUser.bind(this);
         this.onChange = this.onChange.bind(this);
     }
     componentDidMount() {
@@ -22,31 +22,34 @@ class ProductEdit extends React.Component {
     } onChange(event) {
         const { name, value } = event.target;
         this.setState(prevState => ({
-            product: { ...prevState.product, [name]: value },
+            user: { ...prevState.user, [name]: value },
         }));
     }
 
-    async updateProduct(event) {
+    async updateUser(event) {
         event.preventDefault();
-        const { product } = this.state;
-        const query = `mutation updateProduct($product: ProductInputs!){
-            updateProduct(product: $product)
+        const { user } = this.state;
+        const query = `mutation updateUser($user: UserInputs!){
+            updateUser(user: $user)
         }`;
-        delete product['_id'];
-        const data = await graphQLFetch(query, { product });
-        alert('Product Updated');
-            setTimeout(() => window.location.href = '#/ProductList', 1000)
+        user.userType=user.role;
+        delete user['role'];
+        const data = await graphQLFetch(query, { user });
+        alert('User Updated');
+            setTimeout(() => window.location.href = '#/users', 1000)
     }
 
 
     async loadData() {
-        const query = `query getProduct($id: Int!){
-      getProduct(id: $id){
+        const query = `query getUser($id: String!){
+      getUser(id: $id){
         _id
-        id
-        name
-        price
-        barcode
+        userId
+        password
+        userType{_id role}
+        firstName
+        lastName
+        designation
       }
     }`;
         const { match: { params: { id } } } = this.props;
@@ -54,62 +57,72 @@ class ProductEdit extends React.Component {
         vars.id = id;
         const response = await graphQLFetch(query, vars);
         if (response) {
-            const product = response.getProduct;
-            product.id = product.id ? product.id.toString() : '';
-            product.name = product.name ? product.name.toString() : '';
-            product.price = product.price ? product.price.toString() : '';
-            product.barcode = product.barcode ? product.barcode.toString() : '';
-            this.setState({ product });
+            const user = response.getUser;
+            user.userId = user.userId ? user.userId.toString() : '';
+            user.password = user.password ? user.password.toString() : '';
+            user.userType = user.userType ? user.userType : {};
+            user.firstName = user.firstName ? user.firstName.toString() : '';
+            user.lastName = user.lastName ? user.lastName.toString() : '';
+            user.designation = user.designation ? user.designation : {};
+            this.setState({ user });
         } else {
-            this.setState({ product: {} });
+            this.setState({ user: {} });
         }
+        const userTypeList = await graphQLFetch(`query{userTypeList{ _id role }}`);
+        this.setState({userTypes: userTypeList.userTypeList})
     }
 render(){
-    const { product: { id } } = this.state;
+    const { user: { _id } } = this.state;
     const { match: { params: { id: propsId } } } = this.props;
-    if (id == null) {
+    if (_id == null) {
       if (propsId != null) {
-        return <h3>{`Product ID ${propsId} not found.`}</h3>;
+        return <h3>{`User not found.`}</h3>;
       }
       return null;
     }
-    const { product: { name, price, barcode } } = this.state;
-    
-    const linkStyles = {
-      textDecoration: 'none',
-      width: '60%',
-      backgroundColor: '#000000',
-      color: 'white',
-      padding: '20px 15px',
-      border: 'none',
-      borderRadius: '4px',
-      cursor: 'pointer'
-  }
+    const { user: { userId, password, userType, firstName, lastName, designation } } = this.state;
+    const userTypes = this.state.userTypes;
+
     return(
-        <form name="updateProduct" onSubmit={this.updateProduct}>
+        <form name="updateUser" onSubmit={this.updateUser}>
 
-        <h3>{`Editing Product: ${id}`}</h3>
-        <label class="labelstyles" htmlFor="id">Id : </label>
-        <input class="fieldstyles" type="text" name="id" value={id} placeholder="id" disabled />
-        <br></br>
-
-        <label class="labelstyles" htmlFor="name">Name : </label>
-        <input class="fieldstyles" type="text" name="name" value={name} onChange={this.onChange} placeholder="name"  />
-        <br></br>
-
-        <label class="labelstyles" htmlFor="price">Price : </label>
-        <input class="fieldstyles" type="number" name="price" value={price} onChange={this.onChange} placeholder="price" min="1" max="100000"/>
-        <br></br>
-
-        <label class="labelstyles" htmlFor="barcode">Barcode : </label>
-        <input class="fieldstyles" type="text" name="barcode" value={barcode} onChange={this.onChange} placeholder="barcode"/>
-        <br></br>
-
-
-        <button style={linkStyles}> Save </button>
-      </form>
+        <h3>{`Editing User: ${userId}`}</h3>
+        
+      <div>
+      <label class="labelstyles" for="userId">User Id</label>
+      <input class="fieldstyles" type="text" name="userId" value={userId} onChange={this.onChange} placeholder="User Id" readOnly />
+      </div>
+      <div>
+      <label class="labelstyles" for="password">Password</label>
+      <input class="fieldstyles" type="text" name="password" value={password} onChange={this.onChange} placeholder="Password" required />
+      </div>
+      <div>
+      <label class="labelstyles" for="firstName">First Name</label>
+      <input class="fieldstyles" type="text" name="firstName" value={firstName} onChange={this.onChange} placeholder="User Id" readOnly />
+      </div>
+      <div>
+      <label class="labelstyles" for="lastName">Last Name</label>
+      <input class="fieldstyles" type="text" name="lastName" value={lastName} onChange={this.onChange} placeholder="Password" required />
+      </div>
+      <div>
+      <label class="labelstyles" for="designation">Designation</label>
+      <input class="fieldstyles" type="text" name="designation" value={designation} onChange={this.onChange} placeholder="Password" required />
+      </div>
+      
+      <div>
+      <label class="labelstyles" for="role">Role</label>
+      <select class="fieldstyles" name="role" defaultValue={userType._id} onChange={this.onChange} required>
+      <option selected hidden>{userType.role}</option>
+      {userTypes?.map((userType) => (
+              <option value={userType._id}>{userType.role}</option>
+            ))}
+      </select>
+      </div>
+      
+      <button type="submit" class="btn">Update User</button>
+  </form>
     )
 }
 }
 
-export default withRouter(ProductEdit);
+export default withRouter(UserEdit);

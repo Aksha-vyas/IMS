@@ -8,6 +8,9 @@ const user = new Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'UserType'
     },
+    firstName: String,
+    lastName: String,
+    designation: String,
 });
 
 

@@ -94,7 +94,7 @@ class ProductEdit extends React.Component {
         return (
             <form name="updateProduct" onSubmit={this.updateProduct}>
 
-                <h3>{`Editing Product: ${id}`}</h3>
+                <h3>{`Editing Product: ${name}`}</h3>
                 <label class="labelstyles" htmlFor="id">Id : </label>
                 <input class="fieldstyles" type="text" name="id" value={id} placeholder="id" disabled />
                 <br></br>

@@ -6,10 +6,15 @@ class ProductAdd extends React.Component {
   constructor() {
       super();
       this.submit = this.submit.bind(this);
-      this.state ={ barcodeForAdding : ReactSession.get("barcodeForAdding")?ReactSession.get("barcodeForAdding"):""};
+      this.state ={ id: 0, barcodeForAdding : ReactSession.get("barcodeForAdding")?ReactSession.get("barcodeForAdding"):""};
   }
   componentDidMount(){  
-
+    this.loadData();
+  }
+  async loadData(){
+    const id = await graphQLFetch(`query {maxIdProduct}`);
+    console.log("got id  "+id.maxIdProduct);
+    this.setState({id: id.maxIdProduct})
   }
   async addProduct(product) {
       const query = `
@@ -26,11 +31,12 @@ class ProductAdd extends React.Component {
       const data = await graphQLFetch(query, { product });
       return data;
   }
-  submit(e) {
+  async submit(e) {
       e.preventDefault();
-      const form = document.forms.productAdd;
+      const form = document.forms.productAdd;      
+      console.log("state id is "+this.state.id);
       const product = {
-          id: parseInt(form.id.value),
+          id: this.state.id,
           name: form.name.value,
           price: parseFloat(form.price.value),
           quantity: parseInt(form.quantity.value),
@@ -66,19 +72,20 @@ class ProductAdd extends React.Component {
           cursor: 'pointer'
       }
       const {barcodeForAdding} = this.state
+      const {id} = this.state
       return (
           <form name="productAdd" onSubmit={this.submit}>
               <div>
               <label class="labelstyles" htmlFor="id">Product Id</label>
-              <input class="fieldstyles" type="text" name="id" placeholder="Product Id" style={fieldstyles} required />
+              <input class="fieldstyles" type="text" name="id" placeholder="Product Id" style={fieldstyles} readOnly value={id} />
               </div>
               <div>
               <label class="labelstyles" htmlFor="name">Product Name</label>
-              <input class="fieldstyles" type="text" name="name" placeholder="Password" style={fieldstyles} required />
+              <input class="fieldstyles" type="text" name="name" placeholder="Name" style={fieldstyles} required />
               </div>
               <div>
               <label class="labelstyles" htmlFor="barcode">Barcode</label>
-              <input class="fieldstyles" type="text" name="barcode" placeholder="barcode" style={fieldstyles} defaultValue={barcodeForAdding} required />
+              <input class="fieldstyles" type="text" name="barcode" placeholder="Barcode" style={fieldstyles} defaultValue={barcodeForAdding} required />
               </div>    
               <div>
               <label class="labelstyles" htmlFor="price">Price</label>
@@ -92,8 +99,9 @@ class ProductAdd extends React.Component {
               <label class="labelstyles" htmlFor="quantity">Quantity</label>
               <input class="fieldstyles" type="text" name="quantity" placeholder="Quantity" style={fieldstyles} required />
               </div>
-              
+              <div>
               <button type="submit" style={buttonStyles}>Add Product</button>
+              </div>
           </form>
       )
   }
