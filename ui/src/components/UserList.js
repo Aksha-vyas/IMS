@@ -6,7 +6,7 @@ class UserTable extends React.Component {
   render() {
     const userRows = this.props.users.map(user => <UserRow key={user._id} user={user} history={this.props.history}/>);
     return (
-      <div id="userTable">
+      <div id="userTable" class="overflow">
       <Link to={`/createUser`} className="btnLink">Create New User Account</Link>
         <table className="bordered-table">
             <thead>

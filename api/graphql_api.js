@@ -7,6 +7,7 @@ const user = require('./user.js');
 const userType = require('./userType.js');
 const product = require('./product.js');
 const { userInfo } = require('os');
+const invoice = require('./invoice.js');
 const resolvers = {
     
     DateScalar : DateScalar,
@@ -20,6 +21,8 @@ const resolvers = {
         getProduct: product.getProduct,
         maxIdProduct : product.maxId,
         getUser : user.getUser,
+        getInvoice: invoice.getinvoice,
+        invoiceList:invoice.invoiceList,
     },
     
     Mutation: {
@@ -30,6 +33,8 @@ const resolvers = {
         updateProduct: product.updateProduct,
         updateUser: user.updateUser,
         deleteUser:user.deleteUser,
+        addInvoice: invoice.addinvoice,
+        updateInvoice: invoice.updateinvoice,
     },
 };
 

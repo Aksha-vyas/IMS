@@ -5,15 +5,14 @@ class ProductTable extends React.Component {
     render() {
         const productRows = this.props.products.map(product => <ProductRow key={product.id} product={product} />);
         return (
+            <div class="overflow">
             <table className="bordered-table">
+                <col span="1" style={{width: '30%'}} />
                 <col span="1" style={{width: '10%'}} />
-                <col span="1" style={{width: '25%'}} />
-                <col span="1" style={{width: '10%'}} />
-                <col span="1" style={{width: '25%'}} />
+                <col span="1" style={{width: '30%'}} />
                 <col span="1" style={{width: '25%'}} />
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Barcode</th>
@@ -24,6 +23,7 @@ class ProductTable extends React.Component {
                     {productRows}
                 </tbody>
             </table>
+            </div>
         )
     }
 }

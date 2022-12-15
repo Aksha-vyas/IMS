@@ -228,6 +228,42 @@ table{
 #scanner-container{
   text-align: center;
 }
+.gallery {
+  align-items: center;
+  justify-content: space-between;
+  font-style: italic;
+}
+.gallery img {
+  top: 0;
+  left: 0;
+  object-fit: contain;
+  width: 16vw;
+  height: 20vw;
+  border-radius: 3vw;
+}
+p {
+  margin: 10px auto;
+  font-size: 1.5vw;
+}
+.col-flex {
+  font-size: 1.5vw;
+  text-align: center;
+  border: solid #1c0d0d;
+  border-radius: 20px;
+  color: #1c0d0d;
+  width: 25vw;
+}
+.wrapper {
+    justify-content: center;
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  clear: both;
+}
 @media (min-width: 800px) {
   .content-left {
     width: 45%;
@@ -238,6 +274,9 @@ table{
   }
 }
 @media (max-width: 799px) {
+  *{
+    margin:2px 0px;
+  }
   .content-left {
     width: 100%;
   }
@@ -251,6 +290,40 @@ table{
   }
   .loginForm input{
     width:100% !important;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+#logo{
+  float: none;
+  width: auto;
+}
+  .body-class {
+    width: 80%;
+  }
+  #navbar{
+    height: fit-content;
+    margin: 15px;
+  }
+  nav{
+    float: none;
+  }
+  nav a{
+    display: block !important;
+  }
+  .overflow{
+    overflow: auto;
+  }
+  nav a::after {
+    height: 2px;
+    bottom: 0px;
+  }
+  .stockContent Button{
+    float: none;
   }
 }
 /* Student Id : 8759314 */

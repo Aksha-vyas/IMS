@@ -11,6 +11,17 @@ input UserTypeInputs{
     role: String
 }
 
+type Invoice{
+    _id:String
+    invoiceId: String
+    items:[Product]
+}
+input InvoiceInputs{
+    _id:String
+    invoiceId: String
+    items:[String]
+}
+
 type User{
     _id:String
     userId: String
@@ -68,6 +79,8 @@ type Query {
     getProduct(id: Int): Product!
     getUser(id: String): User
     maxIdProduct : Int
+    getInvoice(id: String): Invoice
+    invoiceList : [Invoice!]!
 }
 
 type Mutation {
@@ -78,4 +91,6 @@ type Mutation {
     updateProduct(product: ProductInputs!):String
     updateUser(user: UserInputs!):String
     deleteUser(_id: String!): String!
+    addInvoice(invoice: InvoiceInputs!): Invoice!
+    updateInvoice(invoice: InvoiceInputs!): String
 }

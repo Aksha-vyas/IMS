@@ -6,7 +6,7 @@ function jsonDateReviver(key, value) {
 }
 
 export default async function graphQLFetch(query, variables = {}) {
-  console.log(query, variables);
+  console.log(variables);
 
   try {
     const response = await fetch('/graphql', {

@@ -8,6 +8,7 @@ class StockTable extends React.Component {
   render() {
     const stockRows = this.props.products.map(product => <StockRow key={product.id} product={product} />);
     return (
+      <div class="overflow">
         <table className="bordered-table">
             <thead>
                 <tr>
@@ -22,6 +23,7 @@ class StockTable extends React.Component {
                 {stockRows}
             </tbody>
         </table>
+        </div>
     )
 }
 }

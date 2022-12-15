@@ -17,6 +17,7 @@ class ProductList extends React.Component {
   }
   loadData() {
     ReactSession.set("barcodeForAdding", null);
+    ReactSession.set("from", "product");
     const query = `query {
         productList {
               id

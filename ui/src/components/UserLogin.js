@@ -49,6 +49,7 @@ class UserLogin extends React.Component {
               pathname: '/',
             });
         }else{
+            ReactSession.set("invoice_id","SMINV"+new Date().getTime());
             document.getElementById("navbar").style.display="block";
             history.push({
                  pathname: '/products',

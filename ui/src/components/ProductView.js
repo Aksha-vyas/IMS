@@ -1,40 +1,75 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import graphQLFetch from '../graphQLFetch.js';
+import { ReactSession } from 'react-client-session';
 
 
 class ProductView extends React.Component {
     constructor() {
         super();
         this.state = { product: {}, };
-        this.updateProduct = this.updateProduct.bind(this);
-        this.onChange = this.onChange.bind(this);
+        this.saleProduct = this.saleProduct.bind(this);
     }
     componentDidMount() {
         this.loadData();
     }
-    componentDidUpdate(prevProps) {
-        const { match: { params: { id: prevId } } } = prevProps;
-        const { match: { params: { id } } } = this.props;
-        if (id !== prevId) {
-            this.loadData();
-        }
-    } onChange(event) {
-        const { name, value } = event.target;
-        this.setState(prevState => ({
-            product: { ...prevState.product, [name]: value },
-        }));
-    }
+    // componentDidUpdate(prevProps) {
+    //     const { match: { params: { id: prevId } } } = prevProps;
+    //     const { match: { params: { id } } } = this.props;
+    //     if (id !== prevId) {
+    //         this.loadData();
+    //     }
+    // } onChange(event) {
+    //     const { name, value } = event.target;
+    //     this.setState(prevState => ({
+    //         product: { ...prevState.product, [name]: value },
+    //     }));
+    // }
 
-    async updateProduct(event) {
+    async saleProduct(event) {
         event.preventDefault();
-        const { product } = this.state;
-        const query = `mutation updateProduct($product: ProductInputs!){
-            updateProduct(product: $product)
+        const { product} = this.state;
+        const id=ReactSession.get("invoice_id");
+        console.log(id);
+        const query = `query getInvoice($id: String!){
+            getInvoice(id: $id){
+              _id
+              items{
+                _id
+              }
+            }
         }`;
-        delete product['_id'];
-        const data = await graphQLFetch(query, { product });
-        alert('Product Updated');
+        const data = await graphQLFetch(query, {id:id});
+        if(!data.getInvoice){
+            const invoice = {
+                invoiceId:id,
+                items:[product._id]
+            }
+            const query = `
+          mutation addInvoice($invoice: InvoiceInputs!) {
+              addInvoice(invoice: $invoice) {
+                  _id
+              } 
+          }`;
+          const response = await graphQLFetch(query, { invoice });
+        }else{
+            var items=[];
+            var products = data.getInvoice.items;
+            products.forEach(element => {
+                items.push(element._id);
+            });
+            items.push(product._id);
+            const invoice = {
+                invoiceId:id,
+                items:items
+            }
+            const query = `
+          mutation updateInvoice($invoice: InvoiceInputs!) {
+            updateInvoice(invoice: $invoice)
+          }`;
+          const response = await graphQLFetch(query, { invoice });
+        }
+        alert('Product Added');
             setTimeout(() => window.location.href = '#/Products', 1000)
     }
 
@@ -85,8 +120,18 @@ render(){
       borderRadius: '4px',
       cursor: 'pointer'
   }
+  
+  const buttonStyles = {
+    width: '30%',
+    backgroundColor: '#000000',
+    color: 'white',
+    padding: '12px 20px',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer'
+}
     return(
-        <form name="updateProduct" onSubmit={this.updateProduct}>
+        <form name="saleProduct" onSubmit={this.saleProduct}>
 
         <h3>{`Viewing Product: ${id}`}</h3>
         <label class="labelstyles" htmlFor="id">Id : </label>
@@ -105,7 +150,7 @@ render(){
         <input class="fieldstyles" type="text" name="barcode" value={barcode} onChange={this.onChange} placeholder="barcode" disabled/>
         <br></br>
 
-
+        <button style={buttonStyles} type="submit">Add to sales</button>
        
       </form>
     )

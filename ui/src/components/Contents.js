@@ -11,6 +11,8 @@ import UserEdit from './UserEdit';
 import ProductView from './ProductView.js';
 import ProductAdd from './ProductAdd.js';
 import StockList from './StockList.js';
+import AboutUs from './AboutUs.js';
+import Sales from './Sales.js';
 
 const NotFound = () => <h1>Page Not Found</h1>;
 
@@ -28,6 +30,8 @@ export default function Contents() {
             <Route path="/productView/:id" component={ProductView} />
             <Route path="/productAdd" component={ProductAdd}/>
             <Route path="/stock" component={StockList}/>
+            <Route path="/about" component={AboutUs}/>
+            <Route path="/sales" component={Sales}/>
             <Route component={NotFound} />
         </Switch>
     )

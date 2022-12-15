@@ -26,6 +26,8 @@ function NavBar() {
 
         }
         <NavLink id="prod" to="/products">Products</NavLink>
+        <NavLink id="sales" to="/sales">Sales</NavLink>
+        <NavLink to="/about">About Us</NavLink>
         {(type != null) &&
           <NavLink to="/">Logout</NavLink>
 
