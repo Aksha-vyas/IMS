@@ -20,7 +20,7 @@ class BarcodeAdd extends React.Component {
   
     // }
     startScanner() {
-      console.log('Test');
+      console.log('Test Changed');
       const products = this.props.products;
       document.getElementById("scanner-container").style.display = "block";
       document.getElementById("btn").style.display = "none";
